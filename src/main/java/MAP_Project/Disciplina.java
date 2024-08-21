@@ -4,25 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Disciplina {
-    private int id;
     private String nome;
+    private String codigo;
+    private String horario;
     private List<Aluno> alunos;
 
-    public Disciplina(int id, String nome) {
-        this.id = id;
+    public Disciplina(String nome, String codigo, String horario) {
         this.nome = nome;
+        this.codigo = codigo;
+        this.horario = horario;
         this.alunos = new ArrayList<>();
     }
 
-    public int getIdDisciplina() {
-        return id;
-    }
-
-    public String getNomeDisciplina() {
+    public String getNome() {
         return nome;
     }
 
-    public void matricularAluno(Aluno aluno) {
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void adicionarAluno(Aluno aluno) {
         alunos.add(aluno);
     }
 
@@ -33,9 +39,4 @@ public class Disciplina {
     public int getNumeroAlunos() {
         return alunos.size();
     }
-
-    @Override
-    public String toString() {
-        return "Disciplina: " + nome + " (ID: " + id + ")";
-    }
-
+}
