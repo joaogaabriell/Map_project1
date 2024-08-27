@@ -17,11 +17,13 @@ public class ProfessorTest {
     public void testAdicionarDisciplina() {
         Professor professor = new Professor("João", "P001", "Segundas e Quartas 10:00 - 12:00");
         Disciplina disciplina = new Disciplina("Estrutura de Dados", "CS101", "Segundas 10:00 - 12:00");
+
         professor.adicionarDisciplina(disciplina);
 
         assertTrue(professor.getDisciplinas().contains(disciplina));
-        assertEquals(1, disciplina.getAlunos().size());
+        assertTrue(disciplina.getProfessores().contains(professor));
     }
+
 
     @Test
     public void testAdicionarDisciplinaDuplicada() {

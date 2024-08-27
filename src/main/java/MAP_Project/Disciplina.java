@@ -7,15 +7,15 @@ public class Disciplina {
     private String nome;
     private String codigo;
     private String horario;
+    private List<Professor> professores;
     private List<Aluno> alunos;
-    private List<Professor> professores; // Adicionando lista de professores
 
     public Disciplina(String nome, String codigo, String horario) {
         this.nome = nome;
         this.codigo = codigo;
         this.horario = horario;
-        this.alunos = new ArrayList<>();
         this.professores = new ArrayList<>();
+        this.alunos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -42,23 +42,23 @@ public class Disciplina {
         this.horario = horario;
     }
 
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void adicionarAluno(Aluno aluno) {
-        if (aluno != null && !alunos.contains(aluno)) {
-            alunos.add(aluno);
-        }
-    }
-
     public List<Professor> getProfessores() {
         return professores;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
     public void adicionarProfessor(Professor professor) {
         if (professor != null && !professores.contains(professor)) {
             professores.add(professor);
+        }
+    }
+
+    public void adicionarAluno(Aluno aluno) {
+        if (aluno != null && !alunos.contains(aluno)) {
+            alunos.add(aluno);
         }
     }
 
