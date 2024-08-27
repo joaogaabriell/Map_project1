@@ -28,7 +28,7 @@ public class ProfessorTest {
         Professor professor = new Professor("João", "P001", "Segundas e Quartas 10:00 - 12:00");
         Disciplina disciplina = new Disciplina("Estrutura de Dados", "CS101", "Segundas 10:00 - 12:00");
         professor.adicionarDisciplina(disciplina);
-        professor.adicionarDisciplina(disciplina); // Adicionar novamente
+        professor.adicionarDisciplina(disciplina);
 
         assertEquals(1, professor.getDisciplinas().size());
     }
