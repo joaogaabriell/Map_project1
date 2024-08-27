@@ -45,6 +45,9 @@ public class Professor {
     }
 
     public void adicionarDisciplina(Disciplina disciplina) {
-        disciplinas.add(disciplina);
+        if (disciplina != null && !disciplinas.contains(disciplina)) {
+            disciplinas.add(disciplina);
+            disciplina.adicionarProfessor(this);
+        }
     }
 }

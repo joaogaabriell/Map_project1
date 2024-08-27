@@ -4,69 +4,76 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControleAcademico {
-    private List<Aluno> alunos;
-    private List<Professor> professores;
-    private List<Disciplina> disciplinas;
+
     private List<ProfessorDisciplina> professorDisciplinas;
     private List<AlunoDisciplina> alunoDisciplinas;
+    private List<Professor> professores;
+    private List<Aluno> alunos;
+    private List<Disciplina> disciplinas;
 
     public ControleAcademico() {
-        alunos = new ArrayList<>();
-        professores = new ArrayList<>();
-        disciplinas = new ArrayList<>();
-        professorDisciplinas = new ArrayList<>();
-        alunoDisciplinas = new ArrayList<>();
-    }
-
-    public Aluno criarAluno(String nome, String id, String horario) {
-        Aluno novoAluno = new Aluno(nome, id, horario);
-        alunos.add(novoAluno);
-        return novoAluno;
+        this.professorDisciplinas = new ArrayList<>();
+        this.alunoDisciplinas = new ArrayList<>();
+        this.professores = new ArrayList<>();
+        this.alunos = new ArrayList<>();
+        this.disciplinas = new ArrayList<>();
     }
 
     public Professor criarProfessor(String nome, String id, String horario) {
-        Professor novoProfessor = new Professor(nome, id, horario);
-        professores.add(novoProfessor);
-        return novoProfessor;
+        Professor professor = new Professor(nome, id, horario);
+        professores.add(professor);
+        return professor;
+    }
+
+    public Aluno criarAluno(String nome, String id, String horario) {
+        Aluno aluno = new Aluno(nome, id, horario);
+        alunos.add(aluno);
+        return aluno;
     }
 
     public Disciplina criarDisciplina(String nome, String codigo, String horario) {
-        Disciplina novaDisciplina = new Disciplina(nome, codigo, horario);
-        disciplinas.add(novaDisciplina);
-        return novaDisciplina;
-    }
-
-    public AlunoDisciplina criarAlunoDisciplina(Aluno aluno, List<Disciplina> disciplinas, String horario) {
-        AlunoDisciplina novoAlunoDisciplina = new AlunoDisciplina(aluno, disciplinas, horario);
-        alunoDisciplinas.add(novoAlunoDisciplina);
-        return novoAlunoDisciplina;
+        Disciplina disciplina = new Disciplina(nome, codigo, horario);
+        disciplinas.add(disciplina);
+        return disciplina;
     }
 
     public ProfessorDisciplina criarProfessorDisciplina(Professor professor, List<Disciplina> disciplinas, String horario) {
         for (ProfessorDisciplina pd : professorDisciplinas) {
             if (pd.getProfessor().equals(professor) && pd.getHorario().equals(horario)) {
-                throw new RuntimeException("O professor já está cadastrado para este horário.");
+                throw new RuntimeException("Professor já está associado a uma disciplina no mesmo horário.");
             }
         }
-        ProfessorDisciplina novoProfessorDisciplina = new ProfessorDisciplina(professor, disciplinas, horario);
-        professorDisciplinas.add(novoProfessorDisciplina);
-        return novoProfessorDisciplina;
+        ProfessorDisciplina professorDisciplina = new ProfessorDisciplina(professor, disciplinas, horario);
+        professorDisciplinas.add(professorDisciplina);
+
+        for (Disciplina disciplina : disciplinas) {
+            professor.adicionarDisciplina(disciplina);
+        }
+        return professorDisciplina;
+    }
+
+    public AlunoDisciplina criarAlunoDisciplina(Aluno aluno, List<Disciplina> disciplinas, String horario) {
+        for (AlunoDisciplina ad : alunoDisciplinas) {
+            if (ad.getAluno().equals(aluno) && ad.getHorario().equals(horario)) {
+                throw new RuntimeException("Aluno já está associado a uma disciplina no mesmo horário.");
+            }
+        }
+        AlunoDisciplina alunoDisciplina = new AlunoDisciplina(aluno, disciplinas, horario);
+        alunoDisciplinas.add(alunoDisciplina);
+
+        for (Disciplina disciplina : disciplinas) {
+            aluno.adicionarDisciplina(disciplina);
+        }
+        return alunoDisciplina;
     }
 
     public void imprimirInformacoes() {
-        System.out.println("Alunos:");
-        for (Aluno aluno : alunos) {
-            System.out.println("Nome: " + aluno.getNome() + ", ID: " + aluno.getId() + ", Horário: " + aluno.getHorario());
+        System.out.println("Informações de Professores e Alunos:");
+        for (ProfessorDisciplina pd : professorDisciplinas) {
+            System.out.println("Professor: " + pd.getProfessor().getNome() + ", Disciplinas: " + pd.getDisciplinas() + ", Horário: " + pd.getHorario());
         }
-
-        System.out.println("Professores:");
-        for (Professor professor : professores) {
-            System.out.println("Nome: " + professor.getNome() + ", ID: " + professor.getId() + ", Horário: " + professor.getHorario());
-        }
-
-        System.out.println("Disciplinas:");
-        for (Disciplina disciplina : disciplinas) {
-            System.out.println("Nome: " + disciplina.getNome() + ", Código: " + disciplina.getCodigo() + ", Horário: " + disciplina.getHorario());
+        for (AlunoDisciplina ad : alunoDisciplinas) {
+            System.out.println("Aluno: " + ad.getAluno().getNome() + ", Disciplinas: " + ad.getDisciplinas() + ", Horário: " + ad.getHorario());
         }
     }
 }

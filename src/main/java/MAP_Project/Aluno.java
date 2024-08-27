@@ -45,14 +45,9 @@ public class Aluno {
     }
 
     public void adicionarDisciplina(Disciplina disciplina) {
-        try {
-            if (disciplinas.contains(disciplina)) {
-                throw new Exception("Disciplina já matriculada.");
-            }
+        if (disciplina != null && !disciplinas.contains(disciplina)) {
             disciplinas.add(disciplina);
             disciplina.adicionarAluno(this);
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
         }
     }
 }

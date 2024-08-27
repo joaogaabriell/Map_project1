@@ -8,12 +8,14 @@ public class Disciplina {
     private String codigo;
     private String horario;
     private List<Aluno> alunos;
+    private List<Professor> professores; // Adicionando lista de professores
 
     public Disciplina(String nome, String codigo, String horario) {
         this.nome = nome;
         this.codigo = codigo;
         this.horario = horario;
         this.alunos = new ArrayList<>();
+        this.professores = new ArrayList<>();
     }
 
     public String getNome() {
@@ -45,10 +47,18 @@ public class Disciplina {
     }
 
     public void adicionarAluno(Aluno aluno) {
-        if (!alunos.contains(aluno)) {
+        if (aluno != null && !alunos.contains(aluno)) {
             alunos.add(aluno);
-        } else {
-            System.out.println("O aluno já está matriculado nesta disciplina.");
+        }
+    }
+
+    public List<Professor> getProfessores() {
+        return professores;
+    }
+
+    public void adicionarProfessor(Professor professor) {
+        if (professor != null && !professores.contains(professor)) {
+            professores.add(professor);
         }
     }
 
