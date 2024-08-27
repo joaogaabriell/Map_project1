@@ -20,20 +20,36 @@ public class Disciplina {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getCodigo() {
         return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getHorario() {
         return horario;
     }
 
-    public void adicionarAluno(Aluno aluno) {
-        alunos.add(aluno);
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
     public List<Aluno> getAlunos() {
         return alunos;
+    }
+
+    public void adicionarAluno(Aluno aluno) {
+        if (!alunos.contains(aluno)) {
+            alunos.add(aluno);
+        } else {
+            System.out.println("O aluno já está matriculado nesta disciplina.");
+        }
     }
 
     public int getNumeroAlunos() {

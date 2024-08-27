@@ -17,11 +17,23 @@ public class AlunoDisciplina {
         return aluno;
     }
 
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
 
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
     public String getHorario() {
         return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

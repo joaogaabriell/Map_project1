@@ -17,11 +17,23 @@ public class ProfessorDisciplina {
         return professor;
     }
 
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
 
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
     public String getHorario() {
         return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

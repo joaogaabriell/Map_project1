@@ -11,12 +11,10 @@ public class ProfessorDisciplinaTest {
     public void testCriarProfessorDisciplina() {
         Professor professor = new Professor("João", "P001", "Segundas e Quartas 10:00 - 12:00");
         Disciplina disciplina = new Disciplina("Estrutura de Dados", "CS101", "Segundas 10:00 - 12:00");
-        List<Disciplina> disciplinas = List.of(disciplina);
-
-        ProfessorDisciplina professorDisciplina = new ProfessorDisciplina(professor, disciplinas, "Segundas e Quartas 10:00 - 12:00");
+        ProfessorDisciplina professorDisciplina = new ProfessorDisciplina(professor, List.of(disciplina), "Segundas e Quartas 10:00 - 12:00");
 
         assertEquals(professor, professorDisciplina.getProfessor());
-        assertEquals(disciplinas, professorDisciplina.getDisciplinas());
+        assertTrue(professorDisciplina.getDisciplinas().contains(disciplina));
         assertEquals("Segundas e Quartas 10:00 - 12:00", professorDisciplina.getHorario());
     }
 }

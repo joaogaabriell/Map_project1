@@ -8,27 +8,31 @@ import java.util.List;
 public class ControleAcademicoTest {
 
     @Test
-    public void testAdicionarEImprimirInformacoes() {
+    public void testCriarProfessorDisciplinaComHorarioConflitante() {
         ControleAcademico controle = new ControleAcademico();
+        Professor professor = controle.criarProfessor("João", "P001", "Segundas e Quartas 10:00 - 12:00");
+        Disciplina disciplina = controle.criarDisciplina("Estrutura de Dados", "CS101", "Segundas 10:00 - 12:00");
 
-        Professor professor = new Professor("Maria", "P002", "Terças e Quintas 14:00 - 16:00");
-        Disciplina disciplina = new Disciplina("Algoritmos", "CS102", "Terças 14:00 - 16:00");
-        Aluno aluno = new Aluno("Ana", "A002", "Segundas 10:00 - 12:00");
+        controle.criarProfessorDisciplina(professor, List.of(disciplina), "Segundas e Quartas 10:00 - 12:00");
 
-        professor.adicionarDisciplina(disciplina);
-        aluno.adicionarDisciplina(disciplina);
-        disciplina.adicionarAluno(aluno);
+        RuntimeException thrown = assertThrows(RuntimeException.class, () ->
+                controle.criarProfessorDisciplina(professor, List.of(disciplina), "Segundas e Quartas 10:00 - 12:00")
+        );
 
-        ProfessorDisciplina professorDisciplina = new ProfessorDisciplina(professor, List.of(disciplina), "Terças e Quintas 14:00 - 16:00");
-        AlunoDisciplina alunoDisciplina = new AlunoDisciplina(aluno, List.of(disciplina), "Segundas 10:00 - 12:00");
+        assertEquals("O professor já está cadastrado para este horário.", thrown.getMessage());
+    }
 
-        controle.adicionarProfessorDisciplina(professorDisciplina);
-        controle.adicionarAlunoDisciplina(alunoDisciplina);
-        controle.adicionarDisciplina(disciplina);
-        controle.adicionarProfessor(professor);
-        controle.adicionarAluno(aluno);
+    @Test
+    public void testAdicionarAlunoEDisciplina() {
+        ControleAcademico controle = new ControleAcademico();
+        Professor professor = controle.criarProfessor("João", "P001", "Segundas e Quartas 10:00 - 12:00");
+        Disciplina disciplina = controle.criarDisciplina("Estrutura de Dados", "CS101", "Segundas 10:00 - 12:00");
+        Aluno aluno = controle.criarAluno("Carlos", "A001", "Segundas 10:00 - 12:00 e Terças 14:00 - 16:00");
 
+        controle.criarProfessorDisciplina(professor, List.of(disciplina), "Segundas e Quartas 10:00 - 12:00");
+        controle.criarAlunoDisciplina(aluno, List.of(disciplina), "Segundas 10:00 - 12:00 e Terças 14:00 - 16:00");
 
-        assertDoesNotThrow(() -> controle.imprimirInformacoes());
+        assertTrue(aluno.getDisciplinas().contains(disciplina));
+        assertTrue(disciplina.getAlunos().contains(aluno));
     }
 }

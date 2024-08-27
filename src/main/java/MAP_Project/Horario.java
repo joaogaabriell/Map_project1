@@ -1,6 +1,6 @@
 package MAP_Project;
 
-class Horario {
+public class Horario {
     private String horario;
 
     public Horario(String horario) {
