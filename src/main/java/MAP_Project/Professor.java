@@ -7,7 +7,7 @@ public class Professor {
     private String nome;
     private String id;
     private String horario;
-    private List<Disciplina> disciplinas;
+    private final List<Disciplina> disciplinas;
 
     public Professor(String nome, String id, String horario) {
         this.nome = nome;
@@ -47,7 +47,7 @@ public class Professor {
     public void adicionarDisciplina(Disciplina disciplina) {
         if (disciplina != null && !disciplinas.contains(disciplina)) {
             disciplinas.add(disciplina);
-            disciplina.adicionarProfessor(this); // Se necessário adicionar professor à disciplina
+            disciplina.adicionarProfessor(this);
         }
     }
 }

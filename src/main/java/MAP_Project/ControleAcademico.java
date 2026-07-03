@@ -5,11 +5,11 @@ import java.util.List;
 
 public class ControleAcademico {
 
-    private List<ProfessorDisciplina> professorDisciplinas;
-    private List<AlunoDisciplina> alunoDisciplinas;
-    private List<Professor> professores;
-    private List<Aluno> alunos;
-    private List<Disciplina> disciplinas;
+    private final List<ProfessorDisciplina> professorDisciplinas;
+    private final List<AlunoDisciplina> alunoDisciplinas;
+    private final List<Professor> professores;
+    private final List<Aluno> alunos;
+    private final List<Disciplina> disciplinas;
 
     public ControleAcademico() {
         this.professorDisciplinas = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ControleAcademico {
     public ProfessorDisciplina criarProfessorDisciplina(Professor professor, List<Disciplina> disciplinas, String horario) {
         for (ProfessorDisciplina pd : professorDisciplinas) {
             if (pd.getProfessor().equals(professor) && pd.getHorario().equals(horario)) {
-                throw new RuntimeException("Professor já está associado a uma disciplina no mesmo horário.");
+                throw new IllegalStateException("Professor já está associado a uma disciplina no mesmo horário.");
             }
         }
         ProfessorDisciplina professorDisciplina = new ProfessorDisciplina(professor, disciplinas, horario);
@@ -55,7 +55,7 @@ public class ControleAcademico {
     public AlunoDisciplina criarAlunoDisciplina(Aluno aluno, List<Disciplina> disciplinas, String horario) {
         for (AlunoDisciplina ad : alunoDisciplinas) {
             if (ad.getAluno().equals(aluno) && ad.getHorario().equals(horario)) {
-                throw new RuntimeException("Aluno já está associado a uma disciplina no mesmo horário.");
+                throw new IllegalStateException("Aluno já está associado a uma disciplina no mesmo horário.");
             }
         }
         AlunoDisciplina alunoDisciplina = new AlunoDisciplina(aluno, disciplinas, horario);
