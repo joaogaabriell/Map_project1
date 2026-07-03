@@ -7,7 +7,7 @@ public class Aluno {
     private String nome;
     private String id;
     private String horario;
-    private List<Disciplina> disciplinas;
+    private final List<Disciplina> disciplinas;
 
     public Aluno(String nome, String id, String horario) {
         this.nome = nome;
